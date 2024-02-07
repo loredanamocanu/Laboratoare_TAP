@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.regex.Matcher;
-import java.util.Pattern;
-
+import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
@@ -9,6 +8,7 @@ public class Main {
         System.out.println("Introduceți textul:");
         String text = scanner.nextLine();
         scanner.close();
+
         findWords(text);
     }
 
