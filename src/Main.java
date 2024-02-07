@@ -1,27 +1,41 @@
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Main {
     public static void main(String[] args) {
+        TextProcessor textProcessor = new TextProcessor();
+        textProcessor.readText();
+        textProcessor.findWords();
+    }
+}
+
+class TextProcessor {
+    private String text;
+
+    public void readText() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduceți textul:");
-        String text = scanner.nextLine();
+        text = scanner.nextLine();
         scanner.close();
-
-        findWords(text);
     }
 
-    private static void findWords(String text) {
-        Pattern pattern = Pattern.compile("\\b\\w+\\b");
-        Matcher matcher = pattern.matcher(text);
+    public void findWords() {
+        String[] words = text.split(" "); // Împarte textul în cuvinte
 
-        while (matcher.find()) {
-            String word = matcher.group();
-
-            if (word.length() > 1 && word.charAt(0) == word.charAt(word.length() - 1)) {
+        for (String word : words) {
+            if (startsAndEndsWithSameLetter(word)) { // Verifică dacă cuvântul începe și se termină cu aceeași literă
                 System.out.println("Cuvânt găsit: " + word);
             }
+        }
+    }
+
+    private boolean startsAndEndsWithSameLetter(String word) {
+        int length = word.length();
+
+
+        if (word.length() >= 2 && word.substring(0, 1).equalsIgnoreCase(word.substring(length - 1))) {
+            return true;
+        } else {
+            return false;
         }
     }
 }
